@@ -23,10 +23,26 @@ CREATE TABLE funds (
     fund_objective TEXT
 );
 
-CREATE TABLE performances (
+CREATE TABLE fund_classes (
     id SERIAL PRIMARY KEY,
     fund_id INT REFERENCES funds(id),
+    class_name VARCHAR(255),
+    assets NUMERIC,
+    unit_value NUMERIC,
+    description TEXT
+);
+
+CREATE TABLE portfolio_composition (
+    id SERIAL PRIMARY KEY,
+    class_id INT REFERENCES fund_classes(id),
+    asset_type VARCHAR(255),
+    percentage NUMERIC,
+    description TEXT
+);
+
+CREATE TABLE performances (
+    id SERIAL PRIMARY KEY,
+    class_id INT REFERENCES fund_classes(id),
     date DATE,
-    performance NUMERIC,
-    unit_value NUMERIC
+    performance NUMERIC
 );
