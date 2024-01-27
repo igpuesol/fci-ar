@@ -15,7 +15,6 @@ CREATE TABLE funds (
     name VARCHAR(255),
     administrator_id INT REFERENCES administrators(id),
     depository_id INT REFERENCES depositories(id),
-    creation_date DATE,
     income_type VARCHAR(255),
     benchmark VARCHAR(255),
     currency VARCHAR(255),
@@ -27,8 +26,6 @@ CREATE TABLE fund_classes (
     id SERIAL PRIMARY KEY,
     fund_id INT REFERENCES funds(id),
     class_name VARCHAR(255),
-    assets NUMERIC,
-    unit_value NUMERIC,
     description TEXT
 );
 
@@ -44,5 +41,6 @@ CREATE TABLE performances (
     id SERIAL PRIMARY KEY,
     class_id INT REFERENCES fund_classes(id),
     date DATE,
-    performance NUMERIC
+    assets NUMERIC,
+    unit_value NUMERIC
 );
